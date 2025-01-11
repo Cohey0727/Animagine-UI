@@ -4,10 +4,13 @@ from strawberry.fastapi import GraphQLRouter
 from pathlib import Path
 import strawberry
 from .Query import Query
+from .Subscription import Subscription
 
 
 def create_app() -> FastAPI:
-    schema = strawberry.Schema(query=Query)
+    schema = strawberry.Schema(
+        query=Query, subscription=Subscription
+    )
 
     # スキーマファイルを出力
     schema_path = Path(__file__).parent / "schema.graphql"
@@ -22,13 +25,10 @@ def create_app() -> FastAPI:
     @app.get("/schema.graphql")
     async def schema():
         return FileResponse(
-            path=schema_path,
-            filename="schema.graphql",
-            media_type="text/plain"
+            path=schema_path, filename="schema.graphql", media_type="text/plain"
         )
 
     return app
-
 
 
 app = create_app()

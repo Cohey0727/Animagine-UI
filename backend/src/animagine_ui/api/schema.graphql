@@ -1,3 +1,30 @@
+input GenerateImageInput {
+  prompt: String!
+  negativePrompt: String = null
+  width: Int! = 768
+  height: Int! = 768
+  guidanceScale: Float! = 7
+  numInferenceSteps: Int! = 28
+}
+
+type GenerateImagePayload {
+  id: String!
+  status: GenerationStatus!
+  filePath: String
+  errorMessage: String
+}
+
+enum GenerationStatus {
+  WAITING
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
 type Query {
   hello: String!
+}
+
+type Subscription {
+  generateImage(input: GenerateImageInput!): GenerateImagePayload!
 }
