@@ -1,5 +1,5 @@
 [project]
-name = "animagine-ui"
+name = "animagine_ui"
 version = "0.1.0"
 description = "Default template for PDM package"
 authors = [
@@ -11,6 +11,9 @@ dependencies = [
     "transformers>=4.48.0",
     "accelerate>=1.2.1",
     "safetensors>=0.5.2",
+    "fastapi[all]>=0.115.6",
+    "strawberry-graphql>=0.257.0",
+    "uvicorn>=0.34.0",
 ]
 requires-python = ">=3.12"
 readme = "README.md"
