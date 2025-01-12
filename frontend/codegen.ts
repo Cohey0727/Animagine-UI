@@ -5,8 +5,13 @@ const config: CodegenConfig = {
   schema: "./schema.graphql",
   documents: ["src/**/*.graphql"],
   generates: {
-    "src/graphql": {
+    "src/graphql/generated.ts": {
       plugins: [
+        {
+          add: {
+            content: "/* eslint-disable @typescript-eslint/no-explicit-any */",
+          },
+        },
         "typescript",
         "typescript-operations",
         "typescript-urql",

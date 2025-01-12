@@ -15,8 +15,11 @@
     "@linaria/core": "^6.2.0",
     "@linaria/react": "^6.2.1",
     "@tanstack/react-router": "^1.95.3",
+    "graphql-tag": "^2.12.6",
+    "graphql-ws": "^5.16.2",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "urql": "^4.2.1"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.26.3",

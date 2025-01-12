@@ -14,6 +14,7 @@ dependencies = [
     "fastapi[all]>=0.115.6",
     "strawberry-graphql>=0.257.0",
     "uvicorn>=0.34.0",
+    "python-dotenv>=1.0.1",
 ]
 requires-python = ">=3.12"
 readme = "README.md"
