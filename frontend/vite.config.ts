@@ -1,12 +1,11 @@
-import { reactRouter } from "@react-router/dev/vite";
-import wyw from "@wyw-in-js/vite";
 import { defineConfig } from "vite";
-import tsconfigPaths from "vite-tsconfig-paths";
+import react from "@vitejs/plugin-react-swc";
+import wyw from "@wyw-in-js/vite";
 
+// https://vite.dev/config/
 export default defineConfig({
   plugins: [
-    reactRouter(),
-    tsconfigPaths(),
+    react(),
     wyw({
       include: ["**/*.{ts,tsx}"],
       babelOptions: {
