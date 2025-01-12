@@ -26,20 +26,20 @@ export type Scalars = {
 };
 
 export type GenerateImageInput = {
-  readonly guidanceScale?: Scalars["Float"]["input"];
-  readonly height?: Scalars["Int"]["input"];
-  readonly negativePrompt?: InputMaybe<Scalars["String"]["input"]>;
-  readonly numInferenceSteps?: Scalars["Int"]["input"];
-  readonly prompt: Scalars["String"]["input"];
-  readonly width?: Scalars["Int"]["input"];
+  guidanceScale?: Scalars["Float"]["input"];
+  height?: Scalars["Int"]["input"];
+  negativePrompt?: InputMaybe<Scalars["String"]["input"]>;
+  numInferenceSteps?: Scalars["Int"]["input"];
+  prompt: Scalars["String"]["input"];
+  width?: Scalars["Int"]["input"];
 };
 
 export type GenerateImagePayload = {
-  readonly __typename?: "GenerateImagePayload";
-  readonly errorMessage: Maybe<Scalars["String"]["output"]>;
-  readonly filePath: Maybe<Scalars["String"]["output"]>;
-  readonly id: Scalars["String"]["output"];
-  readonly status: GenerationStatus;
+  __typename?: "GenerateImagePayload";
+  errorMessage: Maybe<Scalars["String"]["output"]>;
+  filePath: Maybe<Scalars["String"]["output"]>;
+  id: Scalars["String"]["output"];
+  status: GenerationStatus;
 };
 
 export const GenerationStatus = {
@@ -51,13 +51,13 @@ export const GenerationStatus = {
 
 export type GenerationStatus = (typeof GenerationStatus)[keyof typeof GenerationStatus];
 export type Query = {
-  readonly __typename?: "Query";
-  readonly hello: Scalars["String"]["output"];
+  __typename?: "Query";
+  hello: Scalars["String"]["output"];
 };
 
 export type Subscription = {
-  readonly __typename?: "Subscription";
-  readonly generateImage: GenerateImagePayload;
+  __typename?: "Subscription";
+  generateImage: GenerateImagePayload;
 };
 
 export type SubscriptionGenerateImageArgs = {
@@ -69,19 +69,19 @@ export type GenerateImageSubscriptionVariables = Exact<{
 }>;
 
 export type GenerateImageSubscription = {
-  readonly __typename?: "Subscription";
-  readonly generateImage: {
-    readonly __typename?: "GenerateImagePayload";
-    readonly errorMessage: string | null;
-    readonly filePath: string | null;
-    readonly id: string;
-    readonly status: GenerationStatus;
+  __typename?: "Subscription";
+  generateImage: {
+    __typename?: "GenerateImagePayload";
+    errorMessage: string | null;
+    filePath: string | null;
+    id: string;
+    status: GenerationStatus;
   };
 };
 
 export type HelloQueryVariables = Exact<{ [key: string]: never }>;
 
-export type HelloQuery = { readonly __typename?: "Query"; readonly hello: string };
+export type HelloQuery = { __typename?: "Query"; hello: string };
 
 export const GenerateImageDocument = gql`
   subscription GenerateImage($input: GenerateImageInput!) {

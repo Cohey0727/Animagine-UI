@@ -39,9 +39,6 @@ const config: CodegenConfig = {
           object: true,
           defaultValue: false,
         },
-
-        skipTypename: true,
-        immutableTypes: true,
         defaultScalarType: "unknown",
         enumsAsConst: true,
         scalars: {
