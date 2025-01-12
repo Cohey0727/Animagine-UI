@@ -1,13 +1,16 @@
 import { AnyRoute, createRootRoute, createRoute, createRouter } from "@tanstack/react-router";
 
-type RouteDefinition = {
-  path: string;
+type RouteDefinition<Root extends boolean = true> = {
+  path?: Root extends true ? undefined : string;
   component: () => React.ReactNode;
-  children?: RouteDefinition[];
+  children?: RouteDefinition<false>[];
 };
 
-const createRouteTree = (routes: RouteDefinition[], parentRoute?: AnyRoute) => {
-  return routes.map(({ path, component, children }) => {
+const createRouteTree = <Root extends boolean>(
+  routes: RouteDefinition<Root>[],
+  parentRoute?: AnyRoute,
+) => {
+  return routes.map(({ path = "/", component, children }) => {
     const route = parentRoute
       ? createRoute({ getParentRoute: () => parentRoute, path, component })
       : createRootRoute({ component });
