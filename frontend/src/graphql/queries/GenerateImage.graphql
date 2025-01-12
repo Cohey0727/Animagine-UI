@@ -1,0 +1,8 @@
+subscription GenerateImage($input: GenerateImageInput!) {
+  generateImage(input: $input) {
+    errorMessage
+    filePath
+    id
+    status
+  }
+}

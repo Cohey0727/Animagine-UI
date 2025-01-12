@@ -35,6 +35,7 @@ export type GenerateImageInput = {
 };
 
 export type GenerateImagePayload = {
+  readonly __typename?: "GenerateImagePayload";
   readonly errorMessage: Maybe<Scalars["String"]["output"]>;
   readonly filePath: Maybe<Scalars["String"]["output"]>;
   readonly id: Scalars["String"]["output"];
@@ -50,10 +51,12 @@ export const GenerationStatus = {
 
 export type GenerationStatus = (typeof GenerationStatus)[keyof typeof GenerationStatus];
 export type Query = {
+  readonly __typename?: "Query";
   readonly hello: Scalars["String"]["output"];
 };
 
 export type Subscription = {
+  readonly __typename?: "Subscription";
   readonly generateImage: GenerateImagePayload;
 };
 
@@ -61,10 +64,45 @@ export type SubscriptionGenerateImageArgs = {
   input: GenerateImageInput;
 };
 
+export type GenerateImageSubscriptionVariables = Exact<{
+  input: GenerateImageInput;
+}>;
+
+export type GenerateImageSubscription = {
+  readonly __typename?: "Subscription";
+  readonly generateImage: {
+    readonly __typename?: "GenerateImagePayload";
+    readonly errorMessage: string | null;
+    readonly filePath: string | null;
+    readonly id: string;
+    readonly status: GenerationStatus;
+  };
+};
+
 export type HelloQueryVariables = Exact<{ [key: string]: never }>;
 
-export type HelloQuery = { readonly hello: string };
+export type HelloQuery = { readonly __typename?: "Query"; readonly hello: string };
 
+export const GenerateImageDocument = gql`
+  subscription GenerateImage($input: GenerateImageInput!) {
+    generateImage(input: $input) {
+      errorMessage
+      filePath
+      id
+      status
+    }
+  }
+`;
+
+export function useGenerateImageSubscription<TData = GenerateImageSubscription>(
+  options: Omit<Urql.UseSubscriptionArgs<GenerateImageSubscriptionVariables>, "query">,
+  handler?: Urql.SubscriptionHandler<GenerateImageSubscription, TData>,
+) {
+  return Urql.useSubscription<GenerateImageSubscription, TData, GenerateImageSubscriptionVariables>(
+    { query: GenerateImageDocument, ...options },
+    handler,
+  );
+}
 export const HelloDocument = gql`
   query Hello {
     hello
