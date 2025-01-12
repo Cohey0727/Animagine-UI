@@ -11,11 +11,11 @@ const config: CodegenConfig = {
         { add: { content: "/* eslint-disable @typescript-eslint/no-unused-vars */" } },
         "typescript",
         "typescript-operations",
+        "typescript-urql",
         {
-          "typescript-urql": {
-            config: {
-              documentMode: "string",
-            },
+          "typescript-graphql-request": {
+            documentMode: "string",
+            documentVariableSuffix: "String",
           },
         },
         { add: { content: "export type ISODateString = string & { __brandISODateString: any };" } },
@@ -36,6 +36,7 @@ const config: CodegenConfig = {
         },
         optimizeDocumentNode: false,
         defaultScalarType: "unknown",
+
         enumsAsConst: true,
         scalars: {
           ID: "string",

@@ -1,6 +1,7 @@
 import { useParams } from "@tanstack/react-router";
 import { GenerateImageDocument, useGenerateImageSubscription } from "../../graphql/generated";
 import { useEffect } from "react";
+import { useGraphQLClient } from "../../graphql/utils";
 // import { createWsClient } from "../../graphql/utils";
 
 const AppId = () => {
@@ -12,9 +13,17 @@ const AppId = () => {
     pause: true,
   });
   console.log({ fetching, data, GenerateImageDocument });
-
+  const sdk = useGraphQLClient();
   useEffect(() => {
-    // const client = createWsClient();
+    sdk
+      .GenerateImage({ input: { prompt: "HELLO" } })
+      .then((a) => {
+        console.log({ a });
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+
     // client.subscribe(
     //   { query: GenerateImageDocument },
     //   {
@@ -23,7 +32,7 @@ const AppId = () => {
     //     error: (error) => {},
     //   },
     // );
-  }, []);
+  }, [sdk]);
   return <div>{JSON.stringify(params)}</div>;
 };
 
