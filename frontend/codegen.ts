@@ -7,27 +7,17 @@ const config: CodegenConfig = {
   generates: {
     "src/graphql/generated.ts": {
       plugins: [
-        {
-          add: {
-            content: "/* eslint-disable @typescript-eslint/no-explicit-any */",
-          },
-        },
+        { add: { content: "/* eslint-disable @typescript-eslint/no-explicit-any */" } },
+        { add: { content: "/* eslint-disable @typescript-eslint/no-unused-vars */" } },
         "typescript",
         "typescript-operations",
         "typescript-urql",
-        {
-          add: {
-            content: "export type ISODateString = string & { __brandISODateString: any };",
-          },
-        },
+        "typescript-graphql-request",
+        { add: { content: "export type ISODateString = string & { __brandISODateString: any };" } },
+        { add: { content: "export type ISOTimeString = string & { __brandISOTimeString: any };" } },
         {
           add: {
             content: "export type ISODateTimeString = string & { __brandISODateTimeString: any };",
-          },
-        },
-        {
-          add: {
-            content: "export type ISOTimeString = string & { __brandISOTimeString: any };",
           },
         },
       ],
