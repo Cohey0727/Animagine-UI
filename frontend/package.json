@@ -1,0 +1,35 @@
+{
+  "name": "animagine-ui",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production react-router build",
+    "dev": "react-router dev",
+    "start": "cross-env NODE_ENV=production react-router-serve ./build/server/index.js",
+    "typecheck": "react-router typegen && tsc"
+  },
+  "dependencies": {
+    "@linaria/core": "^6.2.0",
+    "@linaria/react": "^6.2.1",
+    "@react-router/node": "^7.1.1",
+    "@react-router/serve": "^7.1.1",
+    "@wyw-in-js/babel-preset": "^0.5.5",
+    "cross-env": "^7.0.3",
+    "isbot": "^5.1.17",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router": "^7.1.1"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.26.3",
+    "@babel/preset-typescript": "^7.26.0",
+    "@react-router/dev": "^7.1.1",
+    "@types/node": "^20",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.1",
+    "@wyw-in-js/vite": "^0.5.5",
+    "typescript": "^5.7.2",
+    "vite": "^5.4.11",
+    "vite-tsconfig-paths": "^5.1.4"
+  }
+}
