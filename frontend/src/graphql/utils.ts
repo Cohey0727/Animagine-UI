@@ -5,15 +5,18 @@ import { useMemo } from "react";
 const httpUrl = import.meta.env.VITE_GRAPHQL_API_URL;
 const wsUrl = httpUrl.replace(/^http/, "ws");
 
-const createClient = (token?: string) => {
-  const wsClient = createWSClient({
+const createWsClient = (token?: string) => {
+  return createWSClient({
     url: wsUrl,
     connectionParams: () => {
       if (!token) return {};
       return { headers: { Authorization: `Bearer ${token}` } };
     },
   });
+};
 
+const createClient = (token?: string) => {
+  const wsClient = createWsClient(token);
   return new Client({
     url: httpUrl,
     suspense: true,
@@ -43,4 +46,4 @@ const useCreateClient = (token?: string) => {
   return client;
 };
 
-export { createClient, useCreateClient };
+export { createWsClient, createClient, useCreateClient };
