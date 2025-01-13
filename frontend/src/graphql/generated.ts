@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import gql from "graphql-tag";
 import * as Urql from "urql";
-import { GraphQLClient, RequestOptions } from "graphql-request";
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -18,7 +17,6 @@ export type ISODateString = string & { __brandISODateString: any };
 export type ISOTimeString = string & { __brandISOTimeString: any };
 export type ISODateTimeString = string & { __brandISODateTimeString: any };
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
-type GraphQLClientRequestHeaders = RequestOptions["requestHeaders"];
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: { input: string; output: string };
@@ -115,65 +113,3 @@ export const HelloDocument = gql`
 export function useHelloQuery(options?: Omit<Urql.UseQueryArgs<HelloQueryVariables>, "query">) {
   return Urql.useQuery<HelloQuery, HelloQueryVariables>({ query: HelloDocument, ...options });
 }
-
-export const GenerateImageString = `
-    subscription GenerateImage($input: GenerateImageInput!) {
-  generateImage(input: $input) {
-    errorMessage
-    filePath
-    id
-    status
-  }
-}
-    `;
-export const HelloString = `
-    query Hello {
-  hello
-}
-    `;
-
-export type SdkFunctionWrapper = <T>(
-  action: (requestHeaders?: Record<string, string>) => Promise<T>,
-  operationName: string,
-  operationType?: string,
-  variables?: any,
-) => Promise<T>;
-
-const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationType, _variables) =>
-  action();
-
-export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
-  return {
-    GenerateImage(
-      variables: GenerateImageSubscriptionVariables,
-      requestHeaders?: GraphQLClientRequestHeaders,
-    ): Promise<GenerateImageSubscription> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<GenerateImageSubscription>(GenerateImageString, variables, {
-            ...requestHeaders,
-            ...wrappedRequestHeaders,
-          }),
-        "GenerateImage",
-        "subscription",
-        variables,
-      );
-    },
-    Hello(
-      variables?: HelloQueryVariables,
-      requestHeaders?: GraphQLClientRequestHeaders,
-    ): Promise<HelloQuery> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<HelloQuery>(HelloString, variables, {
-            ...requestHeaders,
-            ...wrappedRequestHeaders,
-          }),
-        "Hello",
-        "query",
-        variables,
-      );
-    },
-  };
-}
-export type Sdk = ReturnType<typeof getSdk>;

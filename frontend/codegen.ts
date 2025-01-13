@@ -12,12 +12,6 @@ const config: CodegenConfig = {
         "typescript",
         "typescript-operations",
         "typescript-urql",
-        {
-          "typescript-graphql-request": {
-            documentMode: "string",
-            documentVariableSuffix: "String",
-          },
-        },
         { add: { content: "export type ISODateString = string & { __brandISODateString: any };" } },
         { add: { content: "export type ISOTimeString = string & { __brandISOTimeString: any };" } },
         {

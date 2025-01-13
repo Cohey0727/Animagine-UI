@@ -1,22 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useMemo } from "react";
 import { Client, cacheExchange, fetchExchange, subscriptionExchange } from "urql";
 import { createClient as createWSClient } from "graphql-ws";
-import { useMemo } from "react";
-import { GraphQLClient } from "graphql-request";
-import { getSdk } from "./generated";
 
-const httpUrl = import.meta.env.VITE_GRAPHQL_API_URL;
-const wsUrl = httpUrl.replace(/^http/, "ws");
-
-function createGraphQLClient(token?: string) {
-  return new GraphQLClient(httpUrl, {
-    headers: token ? { Authorization: `Bearer ${token}` } : undefined,
-  });
-}
-
-const useGraphQLSdk = (token?: string) => {
-  const sdk = useMemo(() => getSdk(createGraphQLClient(token)), [token]);
-  return sdk;
-};
+const apiUrl = import.meta.env.VITE_API_URL;
+const graphqlUrl = `${apiUrl}/graphql`;
+const wsUrl = graphqlUrl.replace(/^http/, "ws");
 
 const createWsClient = (token?: string) => {
   return createWSClient({
@@ -31,7 +20,7 @@ const createWsClient = (token?: string) => {
 const createUrqlClient = (token?: string) => {
   const wsClient = createWsClient(token);
   return new Client({
-    url: httpUrl,
+    url: graphqlUrl,
     suspense: true,
     exchanges: [
       cacheExchange,
@@ -59,10 +48,4 @@ const useCreateUrqlClient = (token?: string) => {
   return client;
 };
 
-export {
-  createGraphQLClient,
-  useGraphQLSdk as useGraphQLClient,
-  createWsClient,
-  createUrqlClient,
-  useCreateUrqlClient,
-};
+export { createWsClient, createUrqlClient, useCreateUrqlClient };

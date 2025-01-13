@@ -1,39 +1,44 @@
 import { useParams } from "@tanstack/react-router";
-import { GenerateImageDocument, useGenerateImageSubscription } from "../../graphql/generated";
-import { useEffect } from "react";
-import { useGraphQLClient } from "../../graphql/utils";
+import { useCallback, useMemo, useState } from "react";
+import { useGenerateImageSubscription } from "../../graphql/generated";
+
 // import { createWsClient } from "../../graphql/utils";
 
 const AppId = () => {
   const params = useParams({ from: "/$id" });
-  const [{ data, fetching }] = useGenerateImageSubscription({
-    variables: {
-      input: { prompt: "Very cool girl" },
-    },
-    pause: true,
+  const [pause, setPause] = useState(true);
+  const [prompt, setPrompt] = useState("");
+  const [{ data, fetching, ...res }] = useGenerateImageSubscription({
+    variables: { input: { prompt } },
+    pause,
   });
-  console.log({ fetching, data, GenerateImageDocument });
-  const sdk = useGraphQLClient();
-  useEffect(() => {
-    sdk
-      .GenerateImage({ input: { prompt: "HELLO" } })
-      .then((a) => {
-        console.log({ a });
-      })
-      .catch((e) => {
-        console.error(e);
-      });
 
-    // client.subscribe(
-    //   { query: GenerateImageDocument },
-    //   {
-    //     complete: () => {},
-    //     next: (data) => {},
-    //     error: (error) => {},
-    //   },
-    // );
-  }, [sdk]);
-  return <div>{JSON.stringify(params)}</div>;
+  console.log({ fetching, data, res });
+  const handleChangePrompt = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setPrompt(e.target.value);
+    setPause(true);
+  }, []);
+
+  const handleGenerate = useCallback(async () => {
+    if (pause) {
+      setPause(false);
+    }
+  }, [pause]);
+
+  const imageUrl = useMemo(() => {
+    if (!data) return null;
+    const base = import.meta.env.VITE_API_URL!;
+    return `${base}/${data.generateImage.filePath}`;
+  }, [data]);
+
+  return (
+    <div>
+      {JSON.stringify(params)}
+      <input onChange={handleChangePrompt} />
+      <button onClick={handleGenerate}>生成</button>
+      {imageUrl && <img src={imageUrl} alt="" />}
+    </div>
+  );
 };
 
 export default AppId;

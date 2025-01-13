@@ -1,6 +1,6 @@
 import { Outlet } from "@tanstack/react-router";
 import { Provider as GqlProvider } from "urql";
-import { useCreateUrqlClient } from "../graphql/utils";
+import { useCreateUrqlClient } from "../graphql/core";
 
 const Root = () => {
   const client = useCreateUrqlClient();
