@@ -12,6 +12,7 @@
     "codegen": "graphql-codegen"
   },
   "dependencies": {
+    "@graphql-codegen/plugin-helpers": "^5.1.0",
     "@linaria/core": "^6.2.0",
     "@linaria/react": "^6.2.1",
     "@tanstack/react-router": "^1.95.3",
