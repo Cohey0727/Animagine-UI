@@ -15,9 +15,9 @@
     "@graphql-codegen/plugin-helpers": "^5.1.0",
     "@linaria/core": "^6.2.0",
     "@linaria/react": "^6.2.1",
-    "@tanstack/react-router": "^1.95.3",
+    "@tanstack/react-router": "^1.97.3",
     "graphql-tag": "^2.12.6",
-    "graphql-ws": "^5.16.2",
+    "graphql-ws": "^6.0.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "urql": "^4.2.1"
@@ -29,10 +29,10 @@
     "@graphql-codegen/cli": "^5.0.3",
     "@graphql-codegen/client-preset": "^4.5.1",
     "@graphql-codegen/typescript-urql": "^4.0.0",
-    "@tanstack/router-devtools": "^1.95.3",
-    "@tanstack/router-plugin": "^1.95.3",
-    "@types/react": "^19.0.4",
-    "@types/react-dom": "^19.0.2",
+    "@tanstack/router-devtools": "^1.97.3",
+    "@tanstack/router-plugin": "^1.97.3",
+    "@types/react": "^19.0.7",
+    "@types/react-dom": "^19.0.3",
     "@vitejs/plugin-react-swc": "^3.7.2",
     "@wyw-in-js/vite": "^0.5.5",
     "eslint": "^9.18.0",
@@ -43,7 +43,7 @@
     "prettier": "3.4.2",
     "serve": "^14.2.4",
     "typescript": "~5.7.3",
-    "typescript-eslint": "^8.19.1",
+    "typescript-eslint": "^8.20.0",
     "vite": "^6.0.7"
   }
 }
