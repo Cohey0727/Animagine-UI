@@ -1,6 +1,7 @@
 import { useParams } from "@tanstack/react-router";
 import { useCallback, useMemo, useState } from "react";
 import { useGenerateImageSubscription } from "../../graphql/generated";
+import { Col } from "@/components";
 
 // import { createWsClient } from "../../graphql/utils";
 
@@ -32,12 +33,14 @@ const AppId = () => {
   }, [data]);
 
   return (
-    <div>
-      {JSON.stringify(params)}
-      <input onChange={handleChangePrompt} />
-      <button onClick={handleGenerate}>生成</button>
-      {imageUrl && <img src={imageUrl} alt="" />}
-    </div>
+    <Col fullSize p={4} overflow="auto">
+      <Col variant="concave" p={5}>
+        {JSON.stringify(params)}
+        <input onChange={handleChangePrompt} />
+        <button onClick={handleGenerate}>生成</button>
+        {imageUrl && <img src={imageUrl} alt="" />}
+      </Col>
+    </Col>
   );
 };
 

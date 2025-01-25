@@ -1,7 +1,8 @@
 import { RouterProvider } from "@tanstack/react-router";
-import "./App.css";
-import { buildRouter } from "./utils/router";
+import { buildRouter } from "./utils/router.utils";
 import route from "./route";
+
+import "./App.css";
 
 const router = buildRouter(route);
 

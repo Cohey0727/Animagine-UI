@@ -20,6 +20,9 @@ importers:
       '@tanstack/react-router':
         specifier: ^1.97.3
         version: 1.97.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
       graphql-tag:
         specifier: ^2.12.6
         version: 2.12.6(graphql@16.10.0)
